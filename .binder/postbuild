@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
-# pré-télécharge les poids ResNet18 pendant le build
-python -c "import torchvision, torch; torchvision.models.resnet18(weights='IMAGENET1K_V1')"
-echo "Poids ResNet copiés dans ~/.cache/torch"
+# 1. pré-télécharge les poids (vite)
+python -c "import torchvision; torchvision.models.resnet18(weights='IMAGENET1K_V1')"
+# 2. lance Flask en ARRIÈRE-PLAN (ne bloque pas)
+nohup python server.py --host=0.0.0.0 --port=5000 &
