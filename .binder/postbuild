@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+# pré-télécharge les poids ResNet18 pendant le build
+python -c "import torchvision, torch; torchvision.models.resnet18(weights='IMAGENET1K_V1')"
+echo "Poids ResNet copiés dans ~/.cache/torch"
